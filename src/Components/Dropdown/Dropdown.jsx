@@ -10,11 +10,30 @@ const Dropdown = ({
     options
 }) => {
 
+    const [typedText, setTypedText] = useState(value)
     const [visible, setVisible] = useState(false)
+    const [shouldFilter, setShouldFilter] = useState(false)
 
     const handleTypedTextChange = (e) => {
-        onChange(e.target.value)
+        if (!shouldFilter) setShouldFilter(true)
+        setTypedText(e.target.value)
+}
+
+    const handleClickOption = (option) => {
+        if (shouldFilter) setShouldFilter(false)
+        setTypedText(option.name)
+        onChange(option)
     }
+
+    const filteredOptions = options
+        .filter(item => {
+
+            if (!shouldFilter) return true
+
+            if (!item || !item.name || !typedText) return true
+
+            return item.name.toLowerCase().includes(typedText.toLowerCase())
+        })
 
     return (
         <div className={styles['container']}>
@@ -22,15 +41,29 @@ const Dropdown = ({
                 <div className={styles['input-container']}>
                     <input
                         name={name}
-                        value={value}
+                        value={typedText}
                         onChange={handleTypedTextChange}
                         placeholder={placeHolder}
                         onFocus={() => setVisible(true)}
-                        onBlur={() => setVisible(false)}
+                        onBlur={(e) => {
+
+                                const blurPoint = e
+                                console.log('hex:', blurPoint)
+                                // setShouldFilter(false)
+                                
+                                //select-list-ul
+                                // setVisible(false)
+                        }}
                     />
                     <div className={`${styles['right-caret']} ${visible && styles['hover']}`}>
                         &#10095;
                     </div>
+                </div>
+
+                <div>
+                    {
+                        filteredOptions.length
+                    }
                 </div>
                 {visible && <div className={styles['options-container']}>
                     {
@@ -45,20 +78,19 @@ const Dropdown = ({
                     {
                         !loading && options && <>
                             <div className={styles['list-container']}>
-                                <ul>
+                                <ul className='select-list-ul'>
                                     {
-                                        options
-                                            .filter(item => {
-
-                                                if(!item || !item.name || !value) return true
-
-                                                return value && item.name && item.name.toLowerCase().includes(value.toLowerCase())
-                                            })
-                                            .map((optionsObj, index) => (
-                                            <li key={index}>
-                                                {optionsObj.value}
-                                            </li>
-                                        ))
+                                        filteredOptions.map((optionsObj, index) => (
+                                                <li className='select-list-li' key={index}
+                                                    onClick={e => {
+                                                        // e.preventDefault()
+                                                        e.stopPropagation()
+                                                        handleClickOption(optionsObj)
+                                                    }}
+                                                >
+                                                    {optionsObj.value}
+                                                </li>
+                                            ))
                                     }
                                 </ul>
                             </div>

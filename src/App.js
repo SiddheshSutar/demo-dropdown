@@ -10,7 +10,7 @@ export default function App() {
   /** State created such that the actual value of text input should be in parent,
    * and dropdown should control it via callback
    */
-  const [value, setValue] = useState('')
+  const [selectedValue, setSelectedValue] = useState('')
 
   /** Simulate dynamic dropdown values, coming from some API in real life */
   useEffect(() => {
@@ -35,8 +35,8 @@ export default function App() {
       <h1>Custom dropdown</h1>
       <Dropdown
         placeHolder="Select user"
-        value={value}
-        onChange={val => setValue(val)}
+        value={selectedValue}
+        onChange={val => setSelectedValue(val.name)}
         options = {list}
       />
     </div>
