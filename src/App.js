@@ -36,6 +36,7 @@ export default function App() {
       <Dropdown
         placeHolder="Select user"
         value={selectedValue}
+        loading={loading}
         onChange={val => setSelectedValue(val.name)}
         options = {list}
       />

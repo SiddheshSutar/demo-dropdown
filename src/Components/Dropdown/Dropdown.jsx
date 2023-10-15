@@ -6,7 +6,7 @@ const Dropdown = ({
     value,
     onChange,
     placeHolder = '',
-    loading,
+    loading = false,
     options
 }) => {
 
@@ -17,7 +17,7 @@ const Dropdown = ({
     const handleTypedTextChange = (e) => {
         if (!shouldFilter) setShouldFilter(true)
         setTypedText(e.target.value)
-}
+    }
 
     const handleClickOption = (option) => {
         if (shouldFilter) setShouldFilter(false)
@@ -44,26 +44,21 @@ const Dropdown = ({
                         value={typedText}
                         onChange={handleTypedTextChange}
                         placeholder={placeHolder}
+                        autoComplete='off'
                         onFocus={() => setVisible(true)}
                         onBlur={(e) => {
 
-                                const blurPoint = e
-                                console.log('hex:', blurPoint)
-                                // setShouldFilter(false)
-                                
-                                //select-list-ul
-                                // setVisible(false)
+                            const blurPoint = e
+                            console.log('hex:', blurPoint)
+                            // setShouldFilter(false)
+
+                            //select-list-ul
+                            setVisible(false)
                         }}
                     />
                     <div className={`${styles['right-caret']} ${visible && styles['hover']}`}>
                         &#10095;
                     </div>
-                </div>
-
-                <div>
-                    {
-                        filteredOptions.length
-                    }
                 </div>
                 {visible && <div className={styles['options-container']}>
                     {
@@ -81,16 +76,16 @@ const Dropdown = ({
                                 <ul className='select-list-ul'>
                                     {
                                         filteredOptions.map((optionsObj, index) => (
-                                                <li className='select-list-li' key={index}
-                                                    onClick={e => {
-                                                        // e.preventDefault()
-                                                        e.stopPropagation()
-                                                        handleClickOption(optionsObj)
-                                                    }}
-                                                >
-                                                    {optionsObj.value}
-                                                </li>
-                                            ))
+                                            <li className='select-list-li' key={index}
+                                                onMouseDown={e => {
+                                                    // e.preventDefault()
+                                                    e.stopPropagation()
+                                                    handleClickOption(optionsObj)
+                                                }}
+                                            >
+                                                {optionsObj.value}
+                                            </li>
+                                        ))
                                     }
                                 </ul>
                             </div>
