@@ -49,8 +49,6 @@ const Dropdown = ({
                         onBlur={(e) => {
 
                             const blurPoint = e
-                            console.log('hex:', blurPoint)
-                            // setShouldFilter(false)
 
                             //select-list-ul
                             setVisible(false)
