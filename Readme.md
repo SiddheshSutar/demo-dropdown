@@ -6,15 +6,10 @@ This package has a simple dropdown component.
 
 ## Getting Started
 
-First, run the development server:
+To run in the project in local environment:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+npm start
+
 Open [http://localhost:8080](http://localhost:8080) with your browser to see the result.
 
 # github: https://github.com/SiddheshSutar/demo-dropdown.git
