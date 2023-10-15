@@ -47,10 +47,6 @@ const Dropdown = ({
                         autoComplete='off'
                         onFocus={() => setVisible(true)}
                         onBlur={(e) => {
-
-                            const blurPoint = e
-
-                            //select-list-ul
                             setVisible(false)
                         }}
                     />
@@ -70,7 +66,6 @@ const Dropdown = ({
                     }
                     {
                         !loading && options && <>
-                            <div className={styles['list-container']}>
                                 <ul className='select-list-ul'>
                                     {
                                         filteredOptions.map((optionsObj, index) => (
@@ -86,7 +81,6 @@ const Dropdown = ({
                                         ))
                                     }
                                 </ul>
-                            </div>
                         </>
                     }
                 </div>}
