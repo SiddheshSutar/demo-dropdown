@@ -1,4 +1,8 @@
 # Dropdown component using react JS
+This package has a simple dropdown component.
+
+# Add-On: To have a feature to filter results as per search field;
+# this componet has been created using divs instead of html select element
 
 ## Getting Started
 

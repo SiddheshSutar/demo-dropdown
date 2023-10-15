@@ -10,8 +10,13 @@ const Dropdown = ({
     options
 }) => {
 
+    /** value being entered in text box */
     const [typedText, setTypedText] = useState(value)
+
+    /** flag to control visibility of options */
     const [visible, setVisible] = useState(false)
+
+    /** flag to control whether to show few options out of all options in list */
     const [shouldFilter, setShouldFilter] = useState(false)
 
     const handleTypedTextChange = (e) => {
@@ -21,6 +26,7 @@ const Dropdown = ({
 
     const handleClickOption = (option) => {
         if (shouldFilter) setShouldFilter(false)
+        if (visible) setVisible(false)
         setTypedText(option.name)
         onChange(option)
     }
@@ -37,7 +43,11 @@ const Dropdown = ({
 
     return (
         <div className={styles['container']}>
-            <div className={styles['wrapper']}>
+
+            <div className={styles['wrapper']}
+                onMouseOut={() => setVisible(false)}
+                onMouseOver={() => setVisible(true)}
+            >
                 <div className={styles['input-container']}>
                     <input
                         name={name}
@@ -45,33 +55,29 @@ const Dropdown = ({
                         onChange={handleTypedTextChange}
                         placeholder={placeHolder}
                         autoComplete='off'
-                        onFocus={() => setVisible(true)}
-                        onBlur={(e) => {
-                            setVisible(false)
-                        }}
                     />
                     <div className={`${styles['right-caret']} ${visible && styles['hover']}`}>
                         &#10095;
                     </div>
                 </div>
-                {visible && <div className={styles['options-container']}>
-                    {
-                        loading &&
-                        <div>
-                            <i>
-                                Loading....
-                            </i>
-                        </div>
+                {
+                    visible && <div className={styles['options-container']}>
+                        {
+                            loading &&
+                            <div>
+                                <i>
+                                    Loading....
+                                </i>
+                            </div>
 
-                    }
-                    {
-                        !loading && options && <>
-                                <ul className='select-list-ul'>
+                        }
+                        {
+                            !loading && options && <>
+                                <ul className='select-list-ul' >
                                     {
                                         filteredOptions.map((optionsObj, index) => (
                                             <li className='select-list-li' key={index}
                                                 onMouseDown={e => {
-                                                    // e.preventDefault()
                                                     e.stopPropagation()
                                                     handleClickOption(optionsObj)
                                                 }}
@@ -81,9 +87,10 @@ const Dropdown = ({
                                         ))
                                     }
                                 </ul>
-                        </>
-                    }
-                </div>}
+                            </>
+                        }
+                    </div>
+                }
             </div>
         </div>
     );

@@ -6,10 +6,6 @@ export default function App() {
 
   const [loading, setLoading] = useState(false)
   const [list, setList] = useState([])
-
-  /** State created such that the actual value of text input should be in parent,
-   * and dropdown should control it via callback
-   */
   const [selectedValue, setSelectedValue] = useState('')
 
   /** Simulate dynamic dropdown values, coming from some API in real life */
