@@ -2,8 +2,10 @@ import styles from './dropdown.module.scss'
 import {useState} from 'react'
 
 const Dropdown = ({
+    name='Basic Dropdown',
     value,
-    onChange
+    onChange,
+    placeHolder = '',
 }) => {
 
     const [typedText, setTypedText] = useState('')
@@ -14,8 +16,10 @@ const Dropdown = ({
     return (
         <div className={styles['container']}>
             <input
+                name={name}
                 value={typedText}
                 onChange={handleTypedTextChange}
+                placeholder={placeHolder}
             />
         </div>
     );

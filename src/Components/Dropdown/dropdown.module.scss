@@ -1,4 +1,16 @@
 .container {
-
+    margin: 3rem;
     font-family: sans-serif;
+
+    $main-dark: #b1a3a3;
+    $main-light: #e9e9e9;
+
+    input {
+        padding: 10px 15px;
+        border: 1px solid $main-dark;
+        border-radius: 5px;
+        font-size: 1rem;
+        letter-spacing: 1px;
+        text-decoration: none;
+    }
 }
