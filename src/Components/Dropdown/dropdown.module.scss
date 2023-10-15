@@ -12,5 +12,64 @@
         font-size: 1rem;
         letter-spacing: 1px;
         text-decoration: none;
+        min-width: 30ch;
+    }
+
+    .wrapper {
+        position: relative;
+        
+        .input-container {
+            position: relative;
+
+            .right-caret {
+                position: absolute;
+                top: 28%;
+                right: 4%;
+                font-size: 1rem;
+                width: fit-content;
+                line-height: 1;
+                font-weight: bold;
+                transform: rotate(90deg);
+            }
+            
+            .right-caret.hover {
+                transform: rotate(-90deg);
+            }
+        }
+
+        .options-container {
+            position: absolute;
+            top: 120%;
+            left: 0;
+            max-height: 200px;
+            max-width: 100%;
+            overflow-y: scroll;
+
+            li {
+                padding: 10px 5px;
+            }
+
+            
+        }
+
+        /* width */
+        .options-container::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        /* Track */
+        .options-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        .options-container::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* Handle on hover */
+        .options-container::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
     }
 }
